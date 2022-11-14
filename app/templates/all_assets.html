@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="/static/css/blog.css"> {% endblock %}
+{% block content %}
+{% comment %}
+<div class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/blogimg.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-start">
+      <div class="col-md-8 ftco-animate text-center text-md-left mb-5">
+        <p class="breadcrumbs mb-0"><span class="mr-3"><a href="/index.html/">Home <i
+                class="ion-ios-arrow-forward"></i></a></span> <span>Assets</span></p>
+        <h1 class="mb-3 bread">Assets</h1>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <br>
+    <h1 class="display-4">All Assets</h1>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    {% for i in users %}
+    <div class="col-md-4 ftco-animate">
+      <div class="blog-entry">
+        <a href="{% url 'individual_asset' i.id %}" class="block-20" style="background-image: url('{{i.image.url}}');">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{i.title}}</h5>
+          <p class="card-text">{{i.content}}</p>
+          <a href="{% url 'individual_asset' i.id %}" class="btn btn-primary">Go to assets</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+    <!--Pagination-->
+    <div class="container p-4">
+      <div class="pagination justify-content-center">
+          <span class="step-links">
+            {% if users.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ users.previous_page_number }}">previous</a>
+            {% endif %}
+
+              <span class="current">
+                  Page {{ users.number }} of {{ users.paginator.num_pages }}
+              </span>
+
+            {% if users.has_next %}
+                <a href="?page={{ users.next_page_number }}">next</a>
+                <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+          </span>
+          </div>
+      </div>
+    <!--end of Pagination-->
+
+</div>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+  </svg></div>
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.easing.1.3.js"></script>
+<script src="/static/js/jquery.waypoints.min.js"></script>
+<script src="/static/js/jquery.stellar.min.js"></script>
+<script src="/static/js/owl.carousel.min.js"></script>
+<script src="/static/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/js/aos.js"></script>
+<script src="/static/js/jquery.animateNumber.min.js"></script>
+<script src="/static/js/bootstrap-datepicker.js"></script>
+<script src="/static/js/jquery.timepicker.min.js"></script>
+<script src="/static/js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="/static/js/google-map.js"></script>
+<script src="/static/js/main.js"></script>
+
+{% endblock content %}
